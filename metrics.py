@@ -18,6 +18,7 @@ with open("./pred/res.txt", "r") as f:
         r = [w for w in r]
         pred.append((g, r))
 
+
 def get_bleu():
     ma_bleu = 0.
     ma_bleu1 = 0.
@@ -54,6 +55,7 @@ def get_dist():
     unigrams = []
     bigrams = []
     ma_dist1, ma_dist2 = 0., 0.
+    avg_len = 0.
     for g, r in pred:
         ugs = r
         bgs = []
@@ -65,21 +67,21 @@ def get_dist():
         bigrams += bgs
         ma_dist1 += len(set(ugs)) / (float)(len(ugs))
         ma_dist2 += len(set(bgs)) / (float)(len(bgs) + 1e-16)
-
+        avg_len += len(ugs)
     n = len(pred)
     ma_dist1 /= n
     ma_dist2 /= n
     mi_dist1 = len(set(unigrams)) / (float)(len(unigrams))
     mi_dist2 = len(set(bigrams)) / (float)(len(bigrams))
-
-    return ma_dist1, ma_dist2, mi_dist1, mi_dist2
+    avg_len /= n
+    return ma_dist1, ma_dist2, mi_dist1, mi_dist2, avg_len
 
 
 if True:
     ma_bleu, ma_bleu1, ma_bleu2, ma_bleu3, ma_bleu4,\
     mi_bleu, mi_bleu1, mi_bleu2, mi_bleu3, mi_bleu4 = get_bleu()
 
-    ma_dist1, ma_dist2, mi_dist1, mi_dist2 = get_dist()
+    ma_dist1, ma_dist2, mi_dist1, mi_dist2, avg_len = get_dist()
 
     print("ma_bleu", ma_bleu)
     print("ma_bleu1", ma_bleu1)
@@ -95,11 +97,12 @@ if True:
     print("ma_dist2", ma_dist2)
     print("mi_dist1", mi_dist1)
     print("mi_dist2", mi_dist2)
+    print("avg_len", avg_len)
 
-    print("& %.2f & %.2f & %.2f & %.2f & %.2f & %.2f & %.2f & %.2f & %.2f" \
+    print("& %.2f & %.2f & %.2f & %.2f & %.2f & %.2f & %.2f & %.2f & %.2f & %.2f" \
             % (ma_bleu*100, ma_bleu1*100, ma_bleu2*100, \
                ma_bleu3*100, ma_bleu4*100, ma_dist1*100, \
-               ma_dist2*100, mi_dist1*100, mi_dist2*100))
+               ma_dist2*100, mi_dist1*100, mi_dist2*100, avg_len))
 
     print()
 
