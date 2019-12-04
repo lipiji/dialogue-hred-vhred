@@ -11,7 +11,7 @@ from math import isnan
 import re
 import math
 import pickle
-import gensim
+#import gensim
 
 word2vec_path = "../datasets/GoogleNews-vectors-negative300.bin"
 
