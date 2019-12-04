@@ -692,6 +692,50 @@ class VariationalSolver(Solver):
 
         return epoch_loss
 
+    def generate_for_evaluation(self):
+        self.model.eval()
+        n_sample_step = self.config.n_sample_step
+        n_sent = 0
+        fo = open(self.config.pred_path, "w")
+        for batch_i, (conversations, conversation_length, sentence_length) in enumerate(tqdm(self.eval_data_loader, ncols=80)):
+            # conversations: (batch_size) list of conversations
+            #   conversation: list of sentences
+            #   sentence: list of tokens
+            # conversation_length: list of int
+            # sentence_length: (batch_size) list of conversation list of sentence_lengths
+            assert len(conversations) == 1
+            conversation = conversations[0]
+            context = conversation[:-1]
+            context_str = ' '.join([self.vocab.decode(sent) for sent in context])
+            ground_truth = conversation[-1]
+            n_context = len(context)
+            sentence_length = sentence_length[0][:-1]
+
+            with torch.no_grad():
+                context = to_var(torch.LongTensor(context))
+                context = context.unsqueeze(0)
+                sentence_length = to_var(torch.LongTensor(sentence_length))
+                sentence_length = sentence_length.unsqueeze(0)
+
+            samples = self.model.generate(context, sentence_length, n_context)
+
+            samples = samples.data.cpu().numpy().tolist()
+            sent = samples[0][0]
+            sample = self.vocab.decode(sent) 
+            ground_truth = self.vocab.decode(ground_truth) 
+
+            n_sent += 1
+
+            #print("ground_truth: ", ground_truth)
+            #print("gen: ", samples)
+
+            fo.write(context_str + "\t" + ground_truth + "\t" + sample + "\n")
+            #print(ground_truth + "\t" + sample)
+        print('n_sentences:', n_sent)
+        print('\n')
+        fo.close()
+
+
     def importance_sample(self):
         ''' Perform importance sampling to get tighter bound
         '''
