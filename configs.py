@@ -89,7 +89,7 @@ def get_config(parse=True, **optional_kwargs):
     # Train
     parser.add_argument('--batch_size', type=int, default=128)
     parser.add_argument('--eval_batch_size', type=int, default=50)
-    parser.add_argument('--n_epoch', type=int, default=20)
+    parser.add_argument('--n_epoch', type=int, default=40)
     parser.add_argument('--learning_rate', type=float, default=1e-4)
     parser.add_argument('--optimizer', type=str, default='Adam')
     parser.add_argument('--clip', type=float, default=1.0)
