@@ -58,6 +58,12 @@ Then run:
 python eval_embed.py --model=<model> --checkpoint=<path_to_your_checkpoint>
 ```
 
+## Generation
+To generate the response for the test set:
+```
+python test.py --model=<model> --checkpoint=<path_to_your_checkpoint>
+```
+
 
 ## Reference
 
