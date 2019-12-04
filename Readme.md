@@ -5,7 +5,9 @@ modified based on： https://github.com/ctr4si/A-Hierarchical-Latent-Structure-f
 
 ## Preprocess data
 ./data: train.txt, dev.txt, test.txt
+
 format: u1 </s> u2 </s> \t response
+
 example: w11 w12 w13 </s> w21 w22 </s> w31 w32 w33 w34 \t w1 w2 w3
 
 
