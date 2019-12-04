@@ -1,39 +1,13 @@
 # HRED VHRED VHCR
 modified based on： https://github.com/ctr4si/A-Hierarchical-Latent-Structure-for-Variational-Conversation-Modeling
 
-## Prerequisite
-Install Python packages
 
-```
-pip install -r requirements.txt
-```
 
-## Download & Preprocess data
-Following scripts will
+## Preprocess data
+./data: train.txt, dev.txt, test.txt
+format: u1 </s> u2 </s> \t response
+example: w11 w12 w13 </s> w21 w22 </s> w31 w32 w33 w34 \t w1 w2 w3
 
-1. Create directories `./datasets/cornell/` and `./datasets/ubuntu/` respectively.
-
-2. Download and preprocess conversation data inside each directory.
-
-### for [Cornell Movie Dialogue dataset](https://www.cs.cornell.edu/~cristian/Cornell_Movie-Dialogs_Corpus.html)
-```
-python cornell_preprocess.py
-    --max_sentence_length (maximum number of words in sentence; default: 30)
-    --max_conversation_length (maximum turns of utterances in single conversation; default: 10)
-    --max_vocab_size (maximum size of word vocabulary; default: 20000)
-    --max_vocab_frequency (minimum frequency of word to be included in vocabulary; default: 5)
-    --n_workers (number of workers for multiprocessing; default: os.cpu_count())
-```
-
-### for [Ubuntu Dialog Dataset](http://dataset.cs.mcgill.ca/ubuntu-corpus-1.0/)
-```
-python ubuntu_preprocess.py
-    --max_sentence_length (maximum number of words in sentence; default: 30)
-    --max_conversation_length (maximum turns of utterances in single conversation; default: 10)
-    --max_vocab_size (maximum size of word vocabulary; default: 20000)
-    --max_vocab_frequency (minimum frequency of word to be included in vocabulary; default: 5)
-    --n_workers (number of workers for multiprocessing; default: os.cpu_count())
-```
 
 
 ## Training
@@ -43,27 +17,26 @@ We provide our implementation of VHCR, as well as our reference implementations 
 
 To run training:
 ```
-python train.py --data=<data> --model=<model> --batch_size=<batch_size>
+python train.py --model=<model> --batch_size=<batch_size>
 ```
 
 For example:
-1. Train HRED on Cornell Movie:
+1. Train HRED:
 ```
-python train.py --data=cornell --model=HRED
+python train.py  --model=HRED
 ```
 
 2. Train VHRED with word drop of ratio 0.25 and kl annealing iterations 250000:
 ```
-python train.py --data=ubuntu --model=VHRED --batch_size=40 --word_drop=0.25 --kl_annealing_iter=250000
+python train.py --model=VHRED --batch_size=40 --word_drop=0.25 --kl_annealing_iter=250000
 ```
 
 3. Train VHCR with utterance drop of ratio 0.25:
 ```
-python train.py --data=ubuntu --model=VHCR --batch_size=40 --sentence_drop=0.25 --kl_annealing_iter=250000
+python train.py --model=VHCR --batch_size=40 --sentence_drop=0.25 --kl_annealing_iter=250000
 ```
 
-By default, it will save a model checkpoint every epoch to <save_dir> and a tensorboard summary.
-For more arguments and options, see config.py.
+
 
 
 ## Evaluation
