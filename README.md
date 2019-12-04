@@ -1,5 +1,6 @@
 # HRED VHRED VHCR for Multi-Turn Dialogue Systems
-modified based on： https://github.com/ctr4si/A-Hierarchical-Latent-Structure-for-Variational-Conversation-Modeling
+- modified based on： https://github.com/ctr4si/A-Hierarchical-Latent-Structure-for-Variational-Conversation-Modeling
+- did not reproduce the performance...
 
 
 
