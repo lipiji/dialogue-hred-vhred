@@ -14,7 +14,7 @@ optimizer_dict = {'RMSprop': optim.RMSprop, 'Adam': optim.Adam}
 rnn_dict = {'lstm': nn.LSTM, 'gru': nn.GRU}
 rnncell_dict = {'lstm': StackedLSTMCell, 'gru': StackedGRUCell}
 save_dir = project_dir.joinpath('./ckpt/')
-
+pred_dir = project_dir.joinpath('./pred/')
 
 def str2bool(v):
     """string to boolean"""
@@ -52,6 +52,9 @@ class Config(object):
         self.sentences_path = self.data_dir.joinpath('sentences.pkl')
         self.sentence_length_path = self.data_dir.joinpath('sentence_length.pkl')
         self.conversation_length_path = self.data_dir.joinpath('conversation_length.pkl')
+
+        os.makedirs(pred_dir, exist_ok=True)
+        self.pred_path = pred_dir.joinpath('res.txt')
 
         # Save path
         if self.mode == 'train' and self.checkpoint is None:

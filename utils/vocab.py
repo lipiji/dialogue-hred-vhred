@@ -15,9 +15,9 @@ PAD_ID, UNK_ID, SOS_ID, EOS_ID = [0, 1, 2, 3]
 
 
 class Vocab(object):
-    def __init__(self,  max_size=None, min_freq=1):
+    def __init__(self, lang="en", max_size=None, min_freq=1):
         """Basic Vocabulary object"""
-
+        self.lang = lang
         self.vocab_size = 0
         self.freqdist = FreqDist()
 
@@ -137,4 +137,6 @@ class Vocab(object):
 
     def decode(self, id_list):
         sentence = self.id2sent(id_list)
+        if self.lang == "zh":
+            return ''.join(sentence)
         return ' '.join(sentence)

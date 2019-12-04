@@ -98,7 +98,7 @@ if __name__ == '__main__':
         with open(path, 'wb') as f:
             pickle.dump(obj, f)
 
-    vocab = Vocab()
+    vocab = Vocab(lang="zh")
     for split_type, conversations in [('train', train), ('valid', valid), ('test', test)]:
         print(f'Processing {split_type} dataset...')
         split_data_dir = datasets_dir.joinpath(split_type)
