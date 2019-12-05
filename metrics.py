@@ -4,7 +4,7 @@ from utils.bleu import *
 
 pred = []
 
-with open("./pred/res.txt", "r") as f:
+with open("./pred/res.txt", "r", encoding='utf-8', errors='ignore') as f:
     for line in f:
         line = line.strip()
         if not line:
@@ -28,7 +28,7 @@ def get_bleu():
     ref_lst = []
     hyp_lst = []
     for g, r in  pred:
-        references = g
+        references = [g]
         hypothesis = r
         ref_lst.append(references)
         hyp_lst.append(hypothesis)
