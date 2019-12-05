@@ -66,14 +66,4 @@ python test.py --model=<model> --checkpoint=<path_to_your_checkpoint>
 
 
 ## Reference
-
-If you use this code or dataset as part of any published research, please refer the following paper.
-
-```
-@inproceedings{VHCR:2018:NAACL,
-    author    = {Yookoon Park and Jaemin Cho and Gunhee Kim},
-    title     = "{A Hierarchical Latent Structure for Variational Conversation Modeling}",
-    booktitle = {NAACL},
-    year      = 2018
-    }
-```
+-  https://github.com/ctr4si/A-Hierarchical-Latent-Structure-for-Variational-Conversation-Modeling
