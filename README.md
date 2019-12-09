@@ -64,6 +64,11 @@ To generate the response for the test set:
 python test.py --model=<model> --checkpoint=<path_to_your_checkpoint>
 ```
 
+## BLEU and DIST
+```
+python metrics.py
+```
+
 
 ## Reference
 -  https://github.com/ctr4si/A-Hierarchical-Latent-Structure-for-Variational-Conversation-Modeling
