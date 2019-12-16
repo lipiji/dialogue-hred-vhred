@@ -6,9 +6,9 @@
 ## Preprocess data
 ./data: train.txt, dev.txt, test.txt
 
-format: u1 </s> u2 </s> \t response
+format: u1 <\/s> u2 <\/s> \t response
 
-example: w11 w12 w13 </s> w21 w22 </s> w31 w32 w33 w34 \t w1 w2 w3
+example: w11 w12 w13 <\/s> w21 w22 <\/s> w31 w32 w33 w34 \t w1 w2 w3
 
 then:
 ```
@@ -62,6 +62,11 @@ python eval_embed.py --model=<model> --checkpoint=<path_to_your_checkpoint>
 To generate the response for the test set:
 ```
 python test.py --model=<model> --checkpoint=<path_to_your_checkpoint>
+```
+
+## BLEU and DIST
+```
+python metrics.py
 ```
 
 

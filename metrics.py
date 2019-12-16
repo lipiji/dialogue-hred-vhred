@@ -101,6 +101,7 @@ if True:
     print("mi_dist2", mi_dist2)
     print("avg_len", avg_len)
 
+    # to tex format
     print("& %.2f & %.2f & %.2f & %.2f & %.2f & %.2f & %.2f & %.2f & %.2f & %.2f" \
             % (ma_bleu*100, ma_bleu1*100, ma_bleu2*100, \
                ma_bleu3*100, ma_bleu4*100, ma_dist1*100, \
