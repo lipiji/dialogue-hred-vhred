@@ -105,7 +105,7 @@ def compute_bleu(reference_corpus, translation_corpus, max_order=4,
   if ratio > 1.0:
     bp = 1.
   else:
-    bp = math.exp(1 - 1. / ratio)
+    bp = math.exp(1 - 1. / (ratio + 1e-16))
 
   bleu = geo_mean * bp
 

@@ -11,9 +11,11 @@ with open("./pred/res.txt", "r", encoding='utf-8', errors='ignore') as f:
             continue
         fs = line.split("\t")
         if len(fs) != 3:
-            print("error")
-            continue
-        q, g, r = fs
+            print("error", line)
+            q, g = fs
+            r = ""
+        else:
+            q, g, r = fs
         g = [w for w in g]
         r = [w for w in r]
         pred.append((g, r))
@@ -65,7 +67,7 @@ def get_dist():
             i += 1
         unigrams += ugs
         bigrams += bgs
-        ma_dist1 += len(set(ugs)) / (float)(len(ugs))
+        ma_dist1 += len(set(ugs)) / (float)(len(ugs) + 1e-16)
         ma_dist2 += len(set(bgs)) / (float)(len(bgs) + 1e-16)
         avg_len += len(ugs)
     n = len(pred)
